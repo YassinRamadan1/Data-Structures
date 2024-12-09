@@ -62,16 +62,14 @@ public:
 
 };
 
-template <class T>
+template <class T, int order>
 class BTree {
 
 public:
 
-	int order;
 	int size;
 	BTreeNode <T>* root;
-	BTree(int order) {
-		this->order = order;
+	BTree() {
 		root = new BTreeNode <T>(order);
 	}
 
@@ -145,7 +143,7 @@ public:
 			}
 			int i = 0;
 			n->Add(r->data[order / 2]);
-			
+			//
 			for (; i < n->size; i++)
 				if (n->data[i] == r->data[order / 2]) {
 					for (int j = n->size; j > i; j--)
@@ -162,16 +160,18 @@ public:
 		}
 	}
 
-	void print() {
-		printAux(root);
-	}
 
-	void printAux(BTreeNode <T> * n) {
+	void print() {
+		printAux(root, 0);
+	}
+	void printAux(BTreeNode <T>* n, int depth) {
 		if (!n)
 			return;
+		for (int i = 0; i < depth; i++)
+			std::cout << ' ';
 		n->print();
 		for (int i = 0; i < order + 1; i++)
 			if (n->children[i])
-				printAux(n->children[i]);
+				printAux(n->children[i], depth + 1);
 	}
 };
