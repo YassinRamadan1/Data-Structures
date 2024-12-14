@@ -1,9 +1,10 @@
 #include <iostream>
 #include "BTree.h"
+#include "SuffixArray.h"
 
-int main() {
+void BTreeTest() {
 	
-	BTree<int> t1(3);
+	BTree<int, 3> t1;
 
 	t1.insert(1);
 	t1.insert(5);
@@ -15,7 +16,7 @@ int main() {
 	
 	std::cout << "-----------------------------------------------------------------\n";
 
-	BTree <char> t(5); 
+	BTree <char, 5> t; 
 	
 	t.insert('G');
 	t.insert('I');
@@ -36,7 +37,7 @@ int main() {
 	t.insert('N');
 	t.insert('P');
 	t.insert('Q');
-	/*
+	
 	t.insert('O');
 	t.insert('U');
 	t.insert('V');
@@ -47,7 +48,20 @@ int main() {
 	t.insert('a');
 	t.insert('b');
 	t.insert('c');
-	*/
+	
 	t.print();
+}
+
+void SuffixArrayTest() {
+
+	SuffixArray t("ACGACTACGATAAC$");
+	t.constructUsingPrefixDoubling();
+	t.print();
+	// Prints: 14 11 12 0 6 3 9 13 1 7 4 2 8 10 5
+}
+
+int main() {
+
+	SuffixArrayTest();
 	return 0;
 }
